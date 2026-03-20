@@ -1,7 +1,17 @@
 import flashChatAILogo from "../../public/flashchatai.svg";
 import recoappLogo from "../../public/recoapp.svg";
+import zelo from "../../public/zelo.svg";
 
 export const projects = [
+  {
+    title: "Zelo",
+    description:
+      "Zelo is a Multi-Family Office software designed to project wealth growth, simulate succession planning, and evaluate risks with the support of AI.",
+    image: zelo,
+    repositoryUrl: "https://github.com/LucianoFigueired/mfo-saas",
+    demoUrl: "zelo-eta.vercel.app",
+    techs: ["nextjs", "nestjs", "postgresql", "redis", "openai"],
+  },
   {
     title: "Recoapp",
     description: "A full-stack management platform designed for automotive repair shops.",

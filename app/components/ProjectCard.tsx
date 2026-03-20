@@ -1,5 +1,14 @@
 "use client";
-import { SiNestjs, SiNextdotjs, SiOpenai, SiPostgresql, SiReact, SiReactquery, SiTailwindcss } from "@icons-pack/react-simple-icons";
+import {
+  SiNestjs,
+  SiNextdotjs,
+  SiOpenai,
+  SiPostgresql,
+  SiReact,
+  SiReactquery,
+  SiRedis,
+  SiTailwindcss,
+} from "@icons-pack/react-simple-icons";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -11,6 +20,7 @@ const iconMap: Record<string, any> = {
   tailwind: SiTailwindcss,
   reactQuery: SiReactquery,
   openai: SiOpenai,
+  redis: SiRedis,
 };
 
 interface ProjectCardInterface {
@@ -25,11 +35,15 @@ interface ProjectCardInterface {
 export function ProjectCard({ title, description, repositoryUrl, demoUrl, imageUrl, techs = [] }: ProjectCardInterface) {
   return (
     <motion.div whileHover={{ y: -10 }} className="bg-white rounded-lg overflow-hidden border border-zinc-100 shadow-sm">
-      <div className="bg-purple-100 h-48 w-full flex items-center justify-center relative">
+      <div className="bg-white h-48 w-full flex items-center justify-center relative overflow-hidden">
+        <Image src="/project-background.jpg" alt="Background" fill className="object-cover opacity-50" priority />
+
         {imageUrl ? (
-          <Image src={imageUrl} width={120} height={120} alt={title} className="object-contain" />
+          <div className="relative z-10">
+            <Image src={imageUrl} width={120} height={120} alt={title} className="object-contain" />
+          </div>
         ) : (
-          <span className="text-zinc-400">Preview Image</span>
+          <span className="text-zinc-400 relative z-10">Preview Image</span>
         )}
       </div>
 
@@ -53,7 +67,12 @@ export function ProjectCard({ title, description, repositoryUrl, demoUrl, imageU
           </button>
           <button
             className="flex-1 border border-purple-700 text-purple-700 hover:bg-purple-50 text-xs py-2.5 rounded font-bold transition-colors"
-            onClick={() => demoUrl && window.open(demoUrl, "_blank")}
+            onClick={() => {
+              if (demoUrl) {
+                const url = demoUrl.startsWith("http") ? demoUrl : `https://${demoUrl}`;
+                window.open(url, "_blank");
+              }
+            }}
           >
             LIVE DEMO
           </button>
